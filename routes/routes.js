@@ -6,11 +6,11 @@ module.exports = app => {
     
     router.post('/auth', user.auth);
 
-    router.get('/users', protected, user.getUsers)
-    router.get('/users/:id', protected, user.getUserById)
-    router.post('/users', protected, user.createUser)
-    router.put('/users/:id', protected, user.updateUser)
-    router.delete('/users/:id', protected, user.deleteUser)
+    router.get('/users', protected, user.getUsers);
+    router.post('/users', protected, user.createUser);
+    router.get('/users/:id', protected, user.getUserById);
+    router.put('/users/:id', protected, user.updateUser);
+    router.delete('/users/:id', protected, user.deleteUser);
 
     app.use("/api", router);
 }
