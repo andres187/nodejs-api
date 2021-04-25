@@ -1,0 +1,25 @@
+const express = require('express');
+const config = require('../config/configJwt');
+const jwt = require('jsonwebtoken');
+
+const rutasProtegidas = express.Router(); 
+rutasProtegidas.use((req, res, next) => {
+    const token = req.headers['access-token'];
+	
+    if (token) {
+      jwt.verify(token, config.keyJwt, (err, decoded) => {      
+        if (err) {
+          return res.json({ mensaje: 'Token inválida' });    
+        } else {
+          req.decoded = decoded;    
+          next();
+        }
+      });
+    } else {
+      res.send({ 
+          mensaje: 'Token no proveída.' 
+      });
+    }
+ });
+
+ module.exports = rutasProtegidas;
